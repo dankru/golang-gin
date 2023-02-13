@@ -1,0 +1,40 @@
+<!--header.html-->
+<div class="header">
+  <div class="header__container _container">
+    <div class="header__burger">
+      <!-- <span></span> -->
+    </div>
+    <a href="/" class="header__logo">
+      <picture><source srcset="img/AmogusLogo.webp" type="image/webp"><img src="img/AmogusLogo.png" alt="amogusLogo" width="103px" height="59px" /></picture>
+    </a>
+    <nav class="header__menu menu">
+      <ul class="menu__list">
+        <li class="menu__item">
+          <a href="" class="menu__link">Фильмы</a>
+        </li>
+        <li class="menu__item">
+          <a href="/news" class="menu__link">Новости</a>
+        </li>
+        <li class="menu__item">
+          <a href="" class="menu__link">Мероприятия</a>
+        </li>
+        <li class="menu__item">
+          <a href="" class="menu__link">Акции</a>
+        </li>
+        <li class="menu__item">
+          <a href="" class="menu__link">Магазин</a>
+        </li>
+        <li class="menu__item">
+          <a href="" class="menu__link">Площадки</a>
+        </li>
+        <li class="menu__item">
+          <button class="logoutBtn">Выйти</button>
+        </li>
+        {{ if eq .isLogin true}}
+        ВЫ ВОШЛИ В СИСТЕМУ
+        {{ end }}
+      </ul>
+      
+    </nav>
+  </div>
+    </div>
