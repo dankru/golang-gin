@@ -33,9 +33,13 @@ func addContent(table string, row string, value string) {
 
 func prepareQueries() {
 	var e error
-	
+
 	Queries["Select#Genre"], e = db.Prepare(`Select "Name" from "Genre" order by "Name"`)
+
 	Queries["Select#User"], e = db.Prepare(`Select "Login", "Password", "Admin" from "User" where "Login"=$1 and "Password"=$2 order by "Admin"`)
+	Queries["Insert#User"], e = db.Prepare(`Insert Into "User" ("Login", "Password", "Admin") values($1, $2, $3)`)
+	Queries["Delete#User"], e = db.Prepare(`Delete from "User" where "Login"=$1, "Password"=$2, "Admin"=$3`)
+
 	Queries["Select#News"], e = db.Prepare(`Select "Title", "TextContent", "PostDate", "Image" from "News"`)
 	Queries["Insert#News"], e = db.Prepare(`Insert Into "News" ("Title", "TextContent", "PostDate", "Image") values($1, $2, $3, $4)`)
 	Queries["Delete#News"], e = db.Prepare(`Delete from "News" where "Title"=$1`)
@@ -83,6 +87,34 @@ func (m *User) Select() error {
 	}
 	return nil
 }
+func (m *User) Add() error{
+	// Check if this user already exists in database
+	e := m.Select()
+	if e == nil {
+		return errors.New("this user already exists")
+	}
+	
+	stmt, ok := Queries["Insert#User"]
+
+	if !ok {
+		return errors.New("User query doesn't exist")
+	}
+	// Insert data into table
+	_ = stmt.QueryRow(m.Login, m.Password, m.Admin)
+
+
+	return nil
+}
+func (m *User) Delete() error{
+	stmt, ok := Queries["Delete#User"]
+	if !ok {
+		return errors.New("News query doesn't exist")
+	}
+	var r *sql.Row
+	stmt.QueryRow(m.Login, m.Password, m.Admin).Scan(r)
+	fmt.Println(r)
+	return nil
+}
 
 func (m *News) Select() error {
 	stmt, ok := Queries["Select#News"]
@@ -109,23 +141,16 @@ func (m *News) Select() error {
 	}
 	return nil
 }
-
 func (m *News) Add() error {
 	stmt, ok := Queries["Insert#News"]
 	if !ok {
 		return errors.New("News query doesn't exist")
 	}
-	r := stmt.QueryRow(m.Title, m.TextContent, m.PostDate, m.Image)
-	e := r.Scan(&m.Title, &m.TextContent, &m.PostDate, &m.Image)
+	_ = stmt.QueryRow(m.Title, m.TextContent, m.PostDate, m.Image)
 	fmt.Println("After querying object state is= ", m)
-	if e != nil { 
-		fmt.Println(e.Error())
-		return errors.New("something went wrong while adding an Article")
-	}
 
 	return nil
 }
-
 func (m *News) Delete() error{
 	stmt, ok := Queries["Delete#News"]
 	if !ok {
@@ -136,3 +161,4 @@ func (m *News) Delete() error{
 	fmt.Println(r)
 	return nil
 }
+

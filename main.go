@@ -33,17 +33,25 @@ func main() {
 
 	router.Static("assets", cfg.Assets)
 
-	router.GET("/", index)
-	router.GET("/news", news)
-	router.POST("/login", login)
-	router.POST("/logout", logout)
-	router.POST("/news", addNews)
+
+	router.GET("/", getIndexPage)
+	router.GET("/news", getNewsPage)
+	router.GET("/account", getAccountPage)
+
+	router.POST("/account", addUser)
+	router.DELETE("/account", deleteUser)
+	router.POST("/login", loginUser)
+	router.POST("/logout", logoutUser)
+	
+	router.POST("/news", addNews)	
 	router.DELETE("/news", deleteNews)
+
 	router.Run(cfg.ServerHost + ":" + cfg.ServerPort)
 
 }
 
-func index(c *gin.Context) {
+
+func getIndexPage(c *gin.Context) {
 	s := sessions.Default(c)
 
 	admin := false 
@@ -58,15 +66,13 @@ func index(c *gin.Context) {
 		login = true
 	}
 	
-	
-
 	c.HTML(200, "index.html", gin.H{
 			"Admin": admin,
 			"isLogin": login,
 	})
 }
 
-func news(c * gin.Context) {
+func getNewsPage(c * gin.Context) {
 	
 	s := sessions.Default(c)
 	admin := false 
@@ -97,6 +103,43 @@ func news(c * gin.Context) {
 		"Genre": cat.Rows,
 		"News": m.Rows,
 	})
+}
+
+func getAccountPage(c * gin.Context) {
+	s := sessions.Default(c)
+	admin := false 
+	isLogin := false
+
+	role := s.Get("MySecretKey")
+	login := s.Get("MySecretLogin")
+	password := s.Get("MySecretPassword")
+
+	if role == true {
+		admin = true
+		isLogin = true
+	}	else if role == false {
+		isLogin = true
+	}
+
+	var cat Genre
+	e := cat.Select()
+	if e != nil{
+		fmt.Println(e.Error())
+	}
+
+	if isLogin != true {
+		c.HTML(200, "login.html", gin.H {
+			"admin": admin,
+			"isLogin": isLogin,
+		})
+	} else {
+		c.HTML(200, "account.html", gin.H {
+			"admin": admin,
+			"isLogin": isLogin,
+			"login": login,
+			"password": password,
+		})
+	}
 }
 
 func addNews(c *gin.Context){
@@ -136,7 +179,7 @@ func deleteNews(c *gin.Context){
 	}
 }
 
-func login(c *gin.Context) {
+func loginUser(c *gin.Context) {
 
 	var m User
 	e := c.BindJSON(&m)
@@ -159,22 +202,58 @@ func login(c *gin.Context) {
 	s := sessions.Default(c)
 	// Устанавливаем супер секретный ключ
 	s.Set("MySecretKey", m.Admin)
+	s.Set("MySecretLogin", m.Login)
+	s.Set("MySecretPassword", m.Password)
 	// Сохраняем сессию в куках
 	e = s.Save()
-	fmt.Println("session=", s)
-	
+
 	if e != nil{
 		fmt.Println("SOMETHING WRONG WITH THE SESSION: ", e.Error())
 	}
-
-	c.JSON(200, gin.H{
-		"Error": nil,
-		"Login": m.Login,
-	})
+	c.Redirect(301, "/account/login")
+	c.Abort()
+	// c.JSON(200, gin.H{
+	// 	"Error": nil,
+	// 	"login": m.Login,
+	// })
 }
 
-func logout(c *gin.Context) {
+func logoutUser(c *gin.Context) {
 	s := sessions.Default(c)
 	s.Clear()
 	s.Save()
+	c.Redirect(301, "/news")
+}
+
+func addUser(c *gin.Context) {
+	var m User
+	e := c.BindJSON(&m)
+	if e != nil {
+		fmt.Println(e.Error())
+		c.JSON(400, gin.H{"Error": e.Error()})
+	}
+	//Inserting data to postgres
+	
+	e = m.Add()
+
+	if e != nil {
+		fmt.Println(e.Error())
+		c.JSON(400, gin.H{"Error": e.Error()})
+	}
+}
+
+func deleteUser(c *gin.Context){
+	var m User
+	e := c.BindJSON(&m)
+	fmt.Println("ToDeleteData=", m.Login, m.Password, m.Admin)
+	if e != nil {	
+		fmt.Println(e.Error())
+		c.JSON(400, gin.H{"Error": e.Error()})
+	}
+
+	e = m.Delete() 
+	if e != nil {
+		fmt.Println(e.Error())
+		c.JSON(400, gin.H{"Error": e.Error()})
+	}
 }
