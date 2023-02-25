@@ -1,39 +1,65 @@
+'use strict';
+let loginButton = document.querySelector('.loginBtn');
+let registerButton = document.querySelector('.registerBtn');
+let loginInput = document.querySelector('.loginInput');
+let passwordInput = document.querySelector('.passwordInput');
 
-let loginButton = document.querySelector(".loginBtn");
-let logoutButton = document.querySelector(".logoutBtn");
-let loginInput = document.querySelector(".loginInput");
-let loginPass = document.querySelector(".loginPass");
-
-
-loginButton.onclick = Login.bind(loginButton, loginInput, loginPass);
-logoutButton.onclick = Logout.bind(logoutButton);
+loginButton.onclick = Login.bind(loginButton, loginInput, passwordInput);
+registerButton.onclick = Register.bind(registerButton, loginInput, passwordInput);
 
 /**
  * @param {HTMLInputElement} login
  * @param {HTMLInputElement} password
  */
-console.log("login.js");
+console.log('login.js');
 
-// Отправляем POST запрос по адресу /login с данными из полей login и password 
-// Мы отлавливаем этот сценарий в router  
-function Login (login, password) {
-  if (login.value.length < 4) {
-    login.classList.add("incorrect");
-  }
-  console.log("this = ", this);
+// Отправляем POST запрос по адресу /login с данными из полей login и password
+// Мы отлавливаем этот сценарий в router
 
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/login");
-
-  let data = JSON.stringify({
-    login: login.value,
-    password: password.value
-  })
-  xhr.send(data);
+async function Login(login, password) {
+  let responce = await fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      login: login.value,
+      password: password.value,
+    }),
+  });
+  // }).then(fetch('account'));
 }
 
-function Logout() {
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "/logout");
-  xhr.send();  
+async function Register(login, password) {
+  let responce = await fetch('/account', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      login: login.value,
+      password: password.value,
+      Admin: false,
+    }),
+  });
 }
+
+// if (login.value.length < 4) {
+//   login.classList.add('incorrect');
+// }
+// console.log('this = ', this);
+
+// let xhr = new XMLHttpRequest();
+// xhr.open('POST', '/login');
+
+// let data = JSON.stringify({
+//   login: login.value,
+//   password: password.value,
+// });
+// xhr.send(data);
+// }
+// function Logout() {
+//   let xhr = new XMLHttpRequest();
+//   xhr.open("POST", "/logout");
+//   xhr.send();
+// }

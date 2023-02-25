@@ -1,5 +1,5 @@
-let addNewsButton = document.querySelector('.addNewsButton');
-let deleteNewsButton = document.querySelector('.deleteNewsButton');
+let addNewsButton = document.querySelector('.addNewsBtn');
+let deleteNewsButton = document.querySelector('.deleteNewsBtn');
 
 let titleInput = document.querySelector('.titleInput');
 let textInput = document.querySelector('.textInput');
@@ -27,22 +27,24 @@ deleteNewsButton.addEventListener('click', deleteNews);
 
 // Отправляем POST запрос по адресу /news с данными из полей title, text и image
 // Мы отлавливаем этот сценарий в router
-function AddNews(title, text, image) {
+async function AddNews(title, text, image) {
   console.log('this = ', this);
-
-  let xhr = new XMLHttpRequest();
-  xhr.open('POST', '/news');
-
+  
   imagePath = image.value;
   imageName = imagePath.replace(/^.*[\\\/]/, '');
 
   let time = new Date();
-  let data = JSON.stringify({
-    Title: title.value,
-    TextContent: text.value,
-    Image: imageName,
+  let responce = await fetch('/news', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      Title: title.value,
+      TextContent: text.value,
+      Image: imageName,
+    }),
   });
-  xhr.send(data);
 }
 
 // Отправляем DELETE запрос по адресу /news для каждой выбранной
@@ -54,12 +56,15 @@ function deleteNews() {
     if (card.isChosen == true) {
       text = card.textContent;
       let fixedstr = text.replace(Title, '');
-      let xhr = new XMLHttpRequest();
-      xhr.open("DELETE", "/news");
-      let data = JSON.stringify({
-        Title: fixedstr,
+      let responce = fetch('/news', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({
+          Title: fixedstr,
+        }),
       });
-      xhr.send(data);
-    }
+      }
   });
 }
