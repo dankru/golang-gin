@@ -1,0 +1,22 @@
+{{template "_head.html"}} {{template "_header.html"}}
+<div class="wrapper">
+  <div class="account">
+    <div class="account__container _container">
+      <div class="account__info">
+        <div class="account__login">Аккаунт #1: {{ .login }}</div>
+        <div class="account__statistics">Зарегистрирован с</div>
+      </div>
+      <div class="auth__links">
+        <div class="logoutBtn button">Выйти</div>
+        <div class="deleteBtn button">Удалить</div>
+      </div>
+    </div>
+  </div>
+  {{template "_footer.html"}}
+</div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js?_v=20230131223127"></script>
+<script
+  type="text/javascript"
+  src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/logout.js"></script>

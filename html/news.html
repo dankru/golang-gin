@@ -1,106 +1,35 @@
-{{template "head.html"}}
-  <body>
-    <div class="wrapper">
-      <div class="content__categories categories">
-        <ul class="categories__list">
-          <a href="#">
-            <li class="active">Все публикации</li>
-          </a>
-          <a href="#">
-            <li>Новости</li>
-          </a>
-          <a href="#">
-            <li>Фотоотчёты</li>
-          </a>
-        </ul>
-      </div>
-      <div class="header">
-        <div class="header__container _container">
-          <div class="header__burger">
-            <!-- <span></span> -->
-          </div>
-          <a href="/" class="header__logo">
-            <picture
-              ><source srcset="img/AmogusLogo.webp" type="image/webp" />
-              <img src="img/AmogusLogo.png" alt="amogusLogo" width="103px" height="59px"
-            /></picture>
-          </a>
-          <nav class="header__menu menu">
-            <ul class="menu__list">
-              <li class="menu__item">
-                <a href="" class="menu__link">Фильмы</a>
-              </li>
-              <li class="menu__item">
-                <a href="./news" class="menu__link">Новости</a>
-              </li>
-              <li class="menu__item">
-                <a href="" class="menu__link">Мероприятия</a>
-              </li>
-              <li class="menu__item">
-                <a href="" class="menu__link">Акции</a>
-              </li>
-              <li class="menu__item">
-                <a href="" class="menu__link">Магазин</a>
-              </li>
-              <li class="menu__item">
-                <a href="" class="menu__link">Площадки</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      {{ if eq .Admin true}}
-      <div class="container" style="display:flex; flex-direction:column; max-width: 400px">
-        <h2>Добавить Новость</h2>
-        <input class="titleInput" type="text" placeholder="Заголовок" />
-        <textarea class="textInput" placeholder="Текст"></textarea>
-        <input class="imageInput" type="file" accept="image/*" />
-        <button class="addNewsButton">Добавить новость</button>
-        <button class="deleteNewsButton">Удалить Новость</button>
-        {{end}}
-      </div>
-        <!-- {{ range $_, $e := .Genre}}
-      <a href="#"> {{$e.Name}} </a>
-      {{ end }} -->
+{{template "_head.html"}}
+<body>
+  <div class="wrapper">
+    {{template "_header.html"}}
+    <div class="content">
+      <input type="text" class="titleInput" />
+      <input type="text" class="textInput" />
+      <input type="file" class="imageInput" />
+      <div class="addNewsBtn button loginBtn">Добавить</div>
+      <div class="deleteNewsBtn button loginBtn">Удалить</div>
+      <div class="content__container _container">
+        <div class="content__items items">
+          {{ range $_, $e := .News }}
 
-        <div class="content">
-          <div class="content__container _container">
-            <div class="content__items">
-              {{ range $_, $e := .News}}
-              <div class="card">
-                <div class="card__image">
-                  <img src="assets/img/{{$e.Image}}" width="300px" height="300px" alt="#" />
-                </div>
-                <div class="card__title">{{$e.Title}}</div>
-                <div class="card__subtitle">{{printf "%.10s" $e.PostDate}}</div>
-              </div>
-              {{ end }}
+          <div class="card">
+            <div class="card__image">
+              <img src="img/{{$e.Image}}" alt="Clancy" />
             </div>
+            <div class="card__title">{{$e.Title}}</div>
+            <div class="card__subtitle">{{printf "%.10s" $e.PostDate}}</div>
           </div>
-          <!-- <div class="news-button button">Click</div> -->
+
+          {{ end }}
         </div>
       </div>
     </div>
-    <footer class="footer">
-      <nav class="footer__links">
-        <a href="#" class="footer__link">События</a>
-        <a href="#" class="footer__link">Контакты и реквизиты</a>
-        <a href="#" class="footer__link">Правила</a>
-      </nav>
-      <div class="footer__logo">
-        <picture
-          ><source srcset="img/amogus.webp" type="image/webp" />
-          <img src="img/amogus.png" alt="" width="90px" height="90px"
-        /></picture>
-      </div>
-    </footer>
-{{template "loginForm.html"}}
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js?_v=20230131223127"></script>
-    <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/news.js"></script>
-  </body>
-</html>
+    {{template "_footer.html"}}
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js?_v=20230131223127"></script>
+  <script
+    type="text/javascript"
+    src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/news.js"></script>
+</body>

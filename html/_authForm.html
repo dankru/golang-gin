@@ -1,0 +1,34 @@
+<!--_authForm.html-->
+<div class="auth">
+  <div class="auth__container _container">
+    <div class="auth__form">
+      <input class="loginInput input" type="text" id="UserLogin" placeholder="Логин" />
+      <input class="passwordInput input" type="password" id="UserPassword" placeholder="Пароль" />
+      <div class="auth__links">
+        <div class="loginBtn button auth__link">Войти</div>
+        <div class="registerBtn button auth__link">Зарегистрироваться</div>
+      </div>
+    </div>
+    <div class="auth__info">
+      <div class="auth__icon active">
+        <picture
+          ><source srcset="img/infoIcon.webp" type="image/webp" />
+          <img src="img/infoIcon.png" alt="infoIcon"
+        /></picture>
+      </div>
+      <div class="popup-card popup">
+        <div class="popup__overlay">
+          <div class="popup__content">
+            <div class="popup__close-btn">X</div>
+            <div class="title">Заголовок</div>
+            <p class="text">Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-wrong">
+        Пароль должен содержать 12 букв, 35 номеров, 44 дефиса, пять пробелов и 10 слов на латыни
+      </div>
+      <div class="text-good"></div>
+    </div>
+  </div>
+</div>

@@ -1,133 +1,110 @@
-{{template "head.html"}}
-  <body>
-    <div class="header">
-  <div class="header__container _container">
-    <div class="header__burger">
-      <!-- <span></span> -->
+{{template "_head.html"}}
+<body>
+{{template "_header.html"}}
+
+  <div class="main-block">
+    <div class="main-block__container _container">
+      <div class="main-block__card card">
+        <div class="card__logo">
+          <a href="#" class="card__logo">
+            <picture
+              ><source srcset="img/AmogusLogo.webp" type="image/webp" />
+              <img src="img/AmogusLogo.png  " alt="amogusLogo" width="103px" height="59px"
+            /></picture>
+          </a>
+        </div>
+        <div class="card__title title">Кинотеатр для людей</div>
+        <div class="card__subtitle subtitle">Кинотеатр, в котором хочется смотреть кино</div>
+        <div class="card__buttons">
+          <a href="" class="card__button button">Фильмы</a>
+          <a href="" class="card__button button">Показы</a>
+        </div>
+      </div>
+      <div class="main-block__image img">
+        <picture
+          ><source srcset="img/hall1.webp" type="image/webp" />
+          <img src="img/hall1.jpg" alt="hall1" height="520px" width="1010px"
+        /></picture>
+      </div>
     </div>
-    <a href="/" class="header__logo">
-      <picture><source srcset="img/AmogusLogo.webp" type="image/webp"><img src="img/AmogusLogo.png" alt="amogusLogo" width="103px" height="59px" /></picture>
-    </a>
-    <nav class="header__menu menu">
-      <ul class="menu__list">
-        <li class="menu__item">
-          <a href="" class="menu__link">Фильмы</a>
-        </li>
-        <li class="menu__item">
-          <a href="/news" class="menu__link">Новости</a>
-        </li>
-        <li class="menu__item">
-          <a href="" class="menu__link">Мероприятия</a>
-        </li>
-        <li class="menu__item">
-          <a href="" class="menu__link">Акции</a>
-        </li>
-        <li class="menu__item">
-          <a href="" class="menu__link">Магазин</a>
-        </li>
-        <li class="menu__item">
-          <a href="" class="menu__link">Площадки</a>
-        </li>
-        <li class="menu__item">
-          <button class="logoutBtn">Выйти</button>
-        </li>
-        {{ if eq .isLogin true}}
-        ВЫ ВОШЛИ В СИСТЕМУ
-        {{ end }}
-      </ul>
-      
-    </nav>
   </div>
-    </div>
-  
-</div>
-  <nav>
-    
-  </nav>
- <div class="main-block">
-  <div class="main-block__container _container">
-    <div class="main-block__card card">
-      <div class="card__logo">
-        <a href="#" class="card__logo">
-          <picture><source srcset="img/AmogusLogo.webp" type="image/webp"><img src="img/AmogusLogo.png  " alt="amogusLogo" width="103px" height="59px" /></picture>
+
+  <div class="slider-films">
+    <div class="slider-films__container _container">
+      <div class="slider-films__title title">Фильмы</div>
+      <div class="slider-films__slider slider">
+        <a href="#" class="slider-films__item">
+          <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="slider-films__item">
+          <picture
+            ><source srcset="img/theOwlHouse.webp" type="image/webp" />
+            <img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px"
+          /></picture>
+        </a>
+        <a href="#" class="slider-films__item">
+          <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="slider-films__item">
+          <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="slider-films__item">
+          <picture
+            ><source srcset="img/theOwlHouse.webp" type="image/webp" />
+            <img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px"
+          /></picture>
+        </a>
+        <a href="#" class="slider-films__item">
+          <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
         </a>
       </div>
-      <div class="card__title title">Кинотеатр для людей</div>
-      <div class="card__subtitle subtitle">Кинотеатр, в котором хочется смотреть кино</div>
-      <div class="card__buttons">
-        <a href="" class="card__button button">Фильмы</a>
-        <a href="" class="card__button button">Показы</a>
-      </div>
-    </div>
-    <div class="main-block__image img">
-      <picture><source srcset="img/hall1.webp" type="image/webp"><img src="img/hall1.jpg" alt="hall1" height="520px" width="1010px" /></picture>
-    </div>
-  </div>
-</div>
-
-    <div class="films">
-  <div class="films__container _container">
-    <div class="films__title title">Фильмы</div>
-    <div class="films__slider slider">
-    <a href="#" class="films__item">
-      <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
-    </a href="#">
-    <a href="#" class="films__item">
-      <picture><source srcset="img/theOwlHouse.webp" type="image/webp"><img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px" /></picture>
-    </a href="#">
-    <a href="#" class="films__item">
-      <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
-    </a href="#">
-    <a href="#" class="films__item">
-      <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
-    </a href="#">
-    <a href="#" class="films__item">
-      <picture><source srcset="img/theOwlHouse.webp" type="image/webp"><img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px" /></picture>
-    </a href="#">
-    <a href="#" class="films__item">
-      <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
-    </a href="#">
-  </div>
-</div>
-  <!-- Без слайдера -->
-  <!-- <div class="films__container">
-    <div class="films__title title">Анимация</div>
-    <div class="films__movies">
-      <a href="" class="films__movie">
-        <img src="./span/img/midnightGospel 1.jpg" alt="" height="416px" width="289px" />
-      </a>
-      <a href="" class="films__movie">
-        <picture><source srcset="./span/img/theOwlHouse.webp" type="image/webp"><img src="./span/img/theOwlHouse.jpg" alt="" height="416px" width="289px" /></picture>
-      </a>
-      <a href="" class="films__movie">
-        <img src="./span/img/midnightGospel 1.jpg" alt="" height="416px" width="289px" />
-      </a>
-    </div> -->
-</div> <div class="events">
-  <div class="events__container _container">
-    <div class="events__title title">Новости</div>
-    <div class="events__slider slider">
-      <a href="#" class="films__item">
-        <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
-      </a href="#">
-      <a href="#" class="films__item">
-        <picture><source srcset="img/theOwlHouse.webp" type="image/webp"><img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px" /></picture>
-      </a href="#">
-      <a href="#" class="films__item">
-        <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
-      </a href="#">
-      <a href="#" class="films__item">
-        <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
-      </a href="#">
-      <a href="#" class="films__item">
-        <picture><source srcset="img/theOwlHouse.webp" type="image/webp"><img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px" /></picture>
-      </a href="#">
-      <a href="#" class="films__item">
-        <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
-      </a href="#">
     </div>
     <!-- Без слайдера -->
-    <!-- <div class="events__events">
+    <!-- <div class="slider-films__container">
+    <div class="slider-films__title title">Анимация</div>
+    <div class="slider-films__movies">
+      <a href="" class="slider-films__movie">
+        <img src="./span/img/midnightGospel 1.jpg" alt="" height="416px" width="289px" />
+      </a>
+      <a href="" class="slider-films__movie">
+        <picture><source srcset="./span/img/theOwlHouse.webp" type="image/webp"><img src="./span/img/theOwlHouse.jpg" alt="" height="416px" width="289px" /></picture>
+      </a>
+      <a href="" class="slider-films__movie">
+        <img src="./span/img/midnightGospel 1.jpg" alt="" height="416px" width="289px" />
+      </a>
+    </div> -->
+  </div>
+  <div class="events">
+    <div class="events__container _container">
+      <div class="events__title title">Новости</div>
+      <div class="events__slider slider">
+        <a href="#" class="films__item">
+          <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="films__item">
+          <picture
+            ><source srcset="img/theOwlHouse.webp" type="image/webp" />
+            <img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px"
+          /></picture>
+        </a>
+        <a href="#" class="films__item">
+          <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="films__item">
+          <img src="img/midnightGospel 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+        <a href="#" class="films__item">
+          <picture
+            ><source srcset="img/theOwlHouse.webp" type="image/webp" />
+            <img src="img/theOwlHouse.jpg" alt="" height="400px" width="300px"
+          /></picture>
+        </a>
+        <a href="#" class="films__item">
+          <img src="img/invincible 1.jpg" alt="" height="400px" width="300px" />
+        </a>
+      </div>
+      <!-- Без слайдера -->
+      <!-- <div class="events__events">
       <a href="" class="events__event">
         <img
           src="./span/img/midnightGospel 1.jpg"
@@ -150,31 +127,13 @@
           width="289px" />
       </a>
     </div> -->
-    <a href="#" class="events__button button">Все новости</a>
+      <a href="#" class="events__button button">Все новости</a>
+    </div>
   </div>
-</div>
-    <footer class="footer">
-  <nav class="footer__links">
-    <a href="#" class="footer__link">События</a>
-    <a href="#" class="footer__link">Контакты и реквизиты</a>
-    <a href="#" class="footer__link">Правила</a>
-  </nav>
-  <div class="footer__logo">
-    <picture><source srcset="img/amogus.webp" type="image/webp"><img src="img/amogus.png" alt="" width="90px" height="90px" /></picture>
-  </div>
-</footer>
-
-<div>
-  <input class="loginInput" type="text" id="UserLogin" placeholder="Логин"></input>
-  <input class="loginPass" type="password" id="UserPassword" placeholder="Пароль"></input>
-
-  <button class = "loginBtn">Войти</button>
-</div>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js?_v=20230131223127"></script>
-    <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/login.js"></script>
-  </body>
-</html>
+  {{template "_footer.html"}}
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js?_v=20230131223127"></script>
+  <script
+    type="text/javascript"
+    src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
